@@ -257,8 +257,13 @@ export default function connectAdvanced(
         this.initSubscription()
 
         this.state = {
-          store: this.store,
-          subscription: this.propsMode ? undefined : this.subscription
+          contextValue: {
+            store: this.store,
+            subscription: this.propsMode ? undefined : this.subscription
+          },
+          selector: this.selector,
+          lastDerivedProps: this.selector.props,
+          lastWrapperProps: props.wrapperProps
         }
 
         //this.selectDerivedProps = makeDerivedPropsSelector()
@@ -291,6 +296,22 @@ export default function connectAdvanced(
         this.store = null
         this.selector.run = noop
         this.selector.shouldComponentUpdate = false
+      }
+
+      static getDerivedStateFromProps(props, state) {
+        if (!pure || props.wrapperProps !== state.lastWrapperProps) {
+          state.selector.run(props.wrapperProps)
+
+          if (!pure || state.selector.shouldComponentUpdate) {
+            return {
+              lastWrapperProps: props.wrapperProps,
+              lastDerivedProps: state.selector.props,
+              error: state.selector.error
+            }
+          }
+        }
+
+        return null
       }
 
       initSelector() {
@@ -341,7 +362,11 @@ export default function connectAdvanced(
             `${ConnectContextWrapper.displayName}: queueing re-render`
           )
           //this.setState(dummyState)
-          this.forceUpdate()
+          //this.forceUpdate()
+          this.setState({
+            lastDerivedProps: this.selector.props,
+            error: this.selector.error
+          })
         }
       }
 
@@ -359,7 +384,7 @@ export default function connectAdvanced(
         // calling renderWrappedComponent on prototype from indirectRenderWrappedComponent bound to `this`
         return this.renderWrappedComponent()
       }
-
+      /*
       renderWrappedComponent() {
         //const { storeState, store } = value
 
@@ -374,7 +399,7 @@ export default function connectAdvanced(
           store,
           selectorFactoryOptions
         )
-        */
+        * /
         this.selector.run(wrapperProps)
 
         if (this.selector.error) {
@@ -389,32 +414,33 @@ export default function connectAdvanced(
           forwardedRef
         )
       }
-
+*/
       render() {
         const { wrapperProps, forwardedRef, ContextToUse } = this.props
 
+        const { lastDerivedProps, error } = this.state
         /*
-        let storeState = this.store.getState()
+          let storeState = this.store.getState()
 
-        let derivedProps = this.selectDerivedProps(
-          storeState,
-          wrapperProps,
-          store,
-          selectorFactoryOptions
-        )
-        */
+          let derivedProps = this.selectDerivedProps(
+            storeState,
+            wrapperProps,
+            store,
+            selectorFactoryOptions
+          )
+          */
         console.log(`${ConnectContextWrapper.displayName}: rendering`)
-        this.selector.run(wrapperProps)
+        //this.selector.run(wrapperProps)
 
-        if (this.selector.error) {
-          throw this.selector.error
+        if (error) {
+          throw error
         }
 
         return this.selectChildElement(
           WrappedComponent,
-          this.selector.props,
+          lastDerivedProps, //this.selector.props,
           ContextToUse,
-          this.state,
+          this.state.contextValue,
           forwardedRef
         )
       }

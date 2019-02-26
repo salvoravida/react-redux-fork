@@ -1068,9 +1068,9 @@ describe('React', () => {
       document.body.removeChild(div)
       // Called 3 times:
       // - Initial mount
-      // - After first link click, stil mounted
-      // - After second link click, but the queued state update is discarded due to batching as it's unmounted
-      expect(mapStateToPropsCalls).toBe(3)
+      // - After first link click, still mounted
+      // - TODO: After second link click, but the queued state update is discarded due to batching as it's unmounted
+      expect(mapStateToPropsCalls).toBe(2)
       expect(spy).toHaveBeenCalledTimes(0)
       spy.mockRestore()
     })
@@ -1118,10 +1118,13 @@ describe('React', () => {
         return <Passthrough string={string} />
       }
 
-      @connect(
-        state => ({ string: state }),
-        dispatch => ({ dispatch })
-      )
+      function mapState(state) {
+        return {
+          string: state
+        }
+      }
+
+      @connect(mapState)
       class Container extends Component {
         render() {
           return render(this.props)
@@ -1919,11 +1922,12 @@ describe('React', () => {
         </ProviderMock>
       )
 
-      // 1) Initial render
+      // 1) Component subscription init
+      // 2) gDSFP during initial render cycle
       // 2) Post-mount check
-      // 3) After "wasted" re-render
-      expect(mapStateSpy).toHaveBeenCalledTimes(2)
-      expect(mapDispatchSpy).toHaveBeenCalledTimes(2)
+      // 3) gDSFP during "wasted" render cycle
+      expect(mapStateSpy).toHaveBeenCalledTimes(4)
+      expect(mapDispatchSpy).toHaveBeenCalledTimes(4)
 
       // 1) Initial render
       // 2) Triggered by post-mount check with impure results
@@ -1934,9 +1938,9 @@ describe('React', () => {
       storeGetter.storeKey = 'bar'
       externalSetState({ storeGetter })
 
-      // 4) After the the impure update
-      expect(mapStateSpy).toHaveBeenCalledTimes(3)
-      expect(mapDispatchSpy).toHaveBeenCalledTimes(3)
+      // 5) After the the impure update
+      expect(mapStateSpy).toHaveBeenCalledTimes(5)
+      expect(mapDispatchSpy).toHaveBeenCalledTimes(5)
 
       // 3) Triggered by impure update
       expect(impureRenderSpy).toHaveBeenCalledTimes(3)
@@ -2126,7 +2130,11 @@ describe('React', () => {
 
       expect(renderCalls).toBe(1)
       expect(mapStateCalls).toBe(1)
-      expect(() => store.dispatch({ type: 'APPEND', body: 'a' })).toThrow()
+      expect(() => {
+        rtl.act(() => {
+          store.dispatch({ type: 'APPEND', body: 'a' })
+        })
+      }).toThrow()
 
       spy.mockRestore()
     })
