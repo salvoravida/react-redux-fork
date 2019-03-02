@@ -276,6 +276,7 @@ export default function connectAdvanced(
       }
 
       componentDidMount() {
+        this.selector.shouldComponentUpdate = false
         if (!shouldHandleStateChanges) return
 
         // componentWillMount fires during server side rendering, but componentDidMount and
