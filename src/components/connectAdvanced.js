@@ -359,9 +359,8 @@ export default function connectAdvanced(
           this.notifyNestedSubs()
         } else {
           this.componentDidUpdate = this.notifyNestedSubsOnComponentDidUpdate
-          console.log(
-            `${ConnectContextWrapper.displayName}: queueing re-render`
-          )
+
+          //console.log( `${ConnectContextWrapper.displayName}: queueing re-render`)
           //this.setState(dummyState)
           //this.forceUpdate()
           this.setState({
@@ -430,7 +429,7 @@ export default function connectAdvanced(
             selectorFactoryOptions
           )
           */
-        console.log(`${ConnectContextWrapper.displayName}: rendering`)
+        //console.log(`${ConnectContextWrapper.displayName}: rendering`)
         //this.selector.run(wrapperProps)
 
         if (error) {
