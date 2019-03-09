@@ -1,6 +1,6 @@
 {
   "name": "react-redux-fork",
-  "version": "6.2.2",
+  "version": "6.2.3",
   "description": "Official React bindings for Redux - Forked from 6.0",
   "keywords": [
     "react",
@@ -9,9 +9,9 @@
   ],
   "license": "MIT",
   "author": "Dan Abramov <dan.abramov@me.com> (https://github.com/gaearon)",
-  "homepage": "https://github.com/reduxjs/react-redux",
-  "repository": "github:reduxjs/react-redux",
-  "bugs": "https://github.com/reduxjs/react-redux/issues",
+  "homepage": "https://github.com/salvoravida/react-redux-fork",
+  "repository": "github:salvoravida/react-redux-fork",
+  "bugs": "https://github.com/salvoravida/react-redux-fork/issues",
   "main": "./lib/index.js",
   "unpkg": "dist/react-redux.js",
   "module": "es/index.js",
