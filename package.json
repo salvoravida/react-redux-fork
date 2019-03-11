@@ -1,5 +1,5 @@
 {
-  "name": "react-redux-fork",
+  "name": "react-redux-fork-native",
   "version": "6.5.0",
   "description": "Official React bindings for Redux - Forked from 6.0",
   "keywords": [
@@ -37,7 +37,7 @@
   },
   "peerDependencies": {
     "react": "^16.6.0-0",
-    "react-dom": "^16.6.0-0",
+    "react-native": "^0.50.0",
     "redux": "^2.0.0 || ^3.0.0 || ^4.0.0-0"
   },
   "dependencies": {

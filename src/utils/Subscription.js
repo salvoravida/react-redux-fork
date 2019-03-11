@@ -1,4 +1,4 @@
-import { unstable_batchedUpdates } from 'react-dom'
+import { unstable_batchedUpdates } from 'react-native'
 
 // encapsulates the subscription logic for connecting a component to the redux store, as
 // well as nesting subscriptions of descendant components, so that we can ensure the
