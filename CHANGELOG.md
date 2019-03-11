@@ -1,1 +1,2 @@
-All notable changes are described on the [Releases](https://github.com/reduxjs/react-redux/releases) page.
+v6.5.0
+*first react-redux-fork release
