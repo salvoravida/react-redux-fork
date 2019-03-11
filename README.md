@@ -107,7 +107,7 @@ read more about react-redux and context prop here: https://github.com/salvoravid
 ## Why not just a PR to official react-redux project?
 Of Course i have done this before doing a fork, but rr manteiners do not seem to be opened to performances fixes :D
 
-Lukely it's an open source project!
+Luckily it's an open source project!
 
 ## Note 
 Someones think that "you may do not need Redux", and that's true for small apps, but if you need it, you are probably working on a large enterprise app,
