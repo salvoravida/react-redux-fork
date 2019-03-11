@@ -102,7 +102,7 @@ These optimizations require to bump react version to 16.6 (but if you are using 
 * React version > 16.6 instead of 16.4
 * Direct use of <ReactReduxContext.Consumer> { storeValue => ... is no more supported, too slow. use connect instead.
 * use context prop on connected components is removed, too slow. Instead use connect(..., options.context:MyCustomContext) if you need custom context (rarely use-case, like libs)
-read more about react-redux and context prop here: https://github.com/salvoravida/react-redux-fork/context.md
+read more about react-redux and context prop here: https://github.com/salvoravida/react-redux-fork/blob/master/context.md
 
 ## Why not just a PR to official react-redux project?
 Of Course i have done this before to do a fork, but rr manteiners do not seems to be opened to performances fixes :D
