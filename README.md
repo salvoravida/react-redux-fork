@@ -19,6 +19,11 @@ Fast upgrade with alias your packages.json with yarn alias
 "react-redux": "npm:react-redux-fork@^6.5.0"
 ```
 
+## React Native
+```
+npm install --save react-redux-fork-native
+```
+
 ## Benchmark
 Done with official tool :  https://github.com/reduxjs/react-redux-benchmarks
 
