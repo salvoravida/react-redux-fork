@@ -337,20 +337,25 @@ export default function connectAdvanced(
         if (selector.lastProcessedProps !== this.props) selector.run(this.props)
         selector.shouldComponentUpdate = false
 
-        //clean wrapperProps and set ref if forwardRef
-        const { context, store, forwardedRef, ...wrapperProps } = selector.props //eslint-disable-line
-        if (forwardRef) wrapperProps.ref = forwardedRef
-
         if (selector.error) {
           throw selector.error
         } else {
-          return this.newContextValue ? (
-            <ContextToUse.Provider value={this.newContextValue}>
+          if (!selector.props) {
+            throw 'Invalid mapStateToProps or mapDispatchToProps on component ' +
+              displayName
+          } else {
+            //clean wrapperProps and set ref if forwardRef
+            const { context, store, forwardedRef, ...wrapperProps } = selector.props //eslint-disable-line
+            if (forwardRef) wrapperProps.ref = forwardedRef
+
+            return this.newContextValue ? (
+              <ContextToUse.Provider value={this.newContextValue}>
+                <WrappedComponent {...wrapperProps} />
+              </ContextToUse.Provider>
+            ) : (
               <WrappedComponent {...wrapperProps} />
-            </ContextToUse.Provider>
-          ) : (
-            <WrappedComponent {...wrapperProps} />
-          )
+            )
+          }
         }
       }
     }
