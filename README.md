@@ -16,7 +16,7 @@ yarn add react-redux@npm:react-redux-fork
 ```
 Fast upgrade with alias your packages.json with yarn alias
 ```
-"react-redux": "npm:react-redux-fork@^6.5.0"
+"react-redux": "npm:react-redux-fork@^6.5.1"
 ```
 
 ## React Native
