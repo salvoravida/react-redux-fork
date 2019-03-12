@@ -16,7 +16,12 @@ yarn add react-redux@npm:react-redux-fork
 ```
 Fast upgrade with alias your packages.json with yarn alias
 ```
-"react-redux": "npm:react-redux-fork@^6.5.0"
+"react-redux": "npm:react-redux-fork@^6.5.1"
+```
+
+## React Native
+```
+npm install --save react-redux-fork-native
 ```
 
 ## Benchmark
@@ -101,8 +106,7 @@ These optimizations require to bump react version to 16.6 (but if you are using 
 ## Differences from React-Redux 6.0.0
 * React version > 16.6 instead of 16.4
 * Direct use of <ReactReduxContext.Consumer> { storeValue => ... is no more supported, too slow. use connect instead.
-* use context prop on connected components is removed, too slow. Instead use connect(..., options.context:MyCustomContext) if you need custom context (rarely use-case, like libs)
-read more about react-redux and context prop here: https://github.com/salvoravida/react-redux-fork/blob/master/context.md
+* using context prop on connected components is not recommended. Instead use connect(..., options.context:MyCustomContext) if you need custom context (rarely use-case, like libs). Read more about react-redux and context prop here: https://github.com/salvoravida/react-redux-fork/blob/master/context.md
 
 ## Why not just a PR to official react-redux project?
 Of Course i have done this before doing a fork, but rr manteiners do not seem to be opened to performances fixes :D

@@ -28,10 +28,10 @@ If it is your case, in both 6.0.0 and 6.5.0 you can have this code
   </App>
 </Provider >
 //where
-const ConnectedComponentWithContext1= connect(mapState,mapDispat, { context:CustomContext1 })(Component)
-const ConnectedComponentWithContext2= connect(mapState,mapDispat, { context:CustomContext2 })(Component)
+const ConnectedComponentWithContext1= connect(mapState,mapDispat,mergeProp, { context:CustomContext1 })(Component)
+const ConnectedComponentWithContext2= connect(mapState,mapDispat,mergeProp, { context:CustomContext2 })(Component)
 ```
-Also in 6.0.0 you can write an EQUIVALENT way that is no more supported (for performance issue) on 6.5.0
+Also in 6.0.0 you can write an EQUIVALENT way that is supported on 6.5.0 but only when you use React >16.8 (due to performance issue on 16.6 that do not have readContext api)
 
  ```javascript
 <Provider store={store} context={CustomContext1}/>
