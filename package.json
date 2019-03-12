@@ -1,6 +1,6 @@
 {
   "name": "react-redux-fork-native",
-  "version": "6.5.0",
+  "version": "6.5.1",
   "description": "Official React bindings for Redux - Forked from 6.0",
   "keywords": [
     "react",
